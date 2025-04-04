@@ -1,0 +1,123 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>Heart Coherence Monitor</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="monitor-container">
+    <!-- Top Stats Cards Row -->
+    <div class="stats-row">
+      <!-- Coherence Stats Card -->
+      <ion-card class="stats-card">
+        <ion-card-content>
+          <div class="card-header">
+            <span>Average Coherence</span>
+            <ion-icon name="help-circle-outline" class="info-icon"></ion-icon>
+          </div>
+          <div class="main-value" [ngClass]="getCoherenceClass()">
+            {{ coherenceScore.toFixed(1) }}
+          </div>
+          <div class="sub-stat">
+            <span>Coherence Points:</span>
+            <span class="sub-value" [ngClass]="getCoherenceClass()">{{ coherencePoints }}</span>
+          </div>
+        </ion-card-content>
+      </ion-card>
+
+      <!-- Session Stats Card -->
+      <ion-card class="stats-card">
+        <ion-card-content>
+          <div class="card-header">
+            <span>Length</span>
+          </div>
+          <div class="main-value session-time">
+            {{ sessionTime }}
+          </div>
+          <div class="sub-stat">
+            <span>Avg BPM:</span>
+            <span class="sub-value heart-rate">{{ averageHeartRate }}</span>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <!-- HRV Graph Card -->
+    <ion-card class="graph-card">
+      <ion-card-content>
+        <div class="card-header">
+          <span>Heart Rate Variability (HRV)</span>
+          <ion-icon name="help-circle-outline" class="info-icon"></ion-icon>
+        </div>
+        <div class="hrv-graph-container">
+          <!-- We'll replace this with a real chart library later -->
+          <div class="hrv-line-chart">
+            <svg width="100%" height="150" #hrvChart>
+              <path class="hrv-line" [attr.d]="hrvPathData"></path>
+            </svg>
+            <div class="time-axis">
+              <span>00:00</span>
+              <span>00:15</span>
+              <span>00:30</span>
+              <span>00:45</span>
+              <span>01:00</span>
+            </div>
+            <div class="value-axis">
+              <span>80</span>
+              <span>60</span>
+              <span>40</span>
+              <span>20</span>
+              <span>0</span>
+            </div>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Coherence Over Time Graph Card -->
+    <ion-card class="graph-card">
+      <ion-card-content>
+        <div class="card-header">
+          <span>Coherence Over Time</span>
+          <ion-icon name="help-circle-outline" class="info-icon"></ion-icon>
+        </div>
+        <div class="coherence-graph-container">
+          <div class="coherence-chart">
+            <div class="coherence-zones">
+              <div class="zone high"></div>
+              <div class="zone medium"></div>
+              <div class="zone low"></div>
+            </div>
+            <svg width="100%" height="150" #coherenceChart>
+              <path class="coherence-line" [attr.d]="coherencePathData"></path>
+            </svg>
+            <div class="time-axis">
+              <span>00:00</span>
+              <span>00:50</span>
+              <span>01:40</span>
+              <span>02:30</span>
+            </div>
+            <div class="value-axis">
+              <span>5.2</span>
+              <span>4.0</span>
+              <span>1.8</span>
+            </div>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Session Controls -->
+    <div class="controls-container">
+      <ion-button expand="block" (click)="toggleRecording()" [color]="isRecording ? 'danger' : 'primary'" class="touchable">
+        <ion-icon [name]="isRecording ? 'stop-circle' : 'play'" slot="start"></ion-icon>
+        {{ isRecording ? 'Stop Session' : 'Start Session' }}
+      </ion-button>
+      
+      <div class="session-status" *ngIf="isRecording">
+        <ion-icon name="pulse" class="pulse-icon"></ion-icon>
+        <span>Recording...</span>
+      </div>
+    </div>
+  </div>
+</ion-content>

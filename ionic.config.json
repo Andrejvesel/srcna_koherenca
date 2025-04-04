@@ -1,0 +1,7 @@
+{
+  "name": "HeartCoherenceMonitorNew",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}

@@ -1,0 +1,269 @@
+// monitor.page.scss - Updated for card-based design
+
+// Main container
+.monitor-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+// Stats Row
+.stats-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+// Stats Card
+.stats-card {
+  flex: 1;
+  margin: 0 8px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  
+  &:first-child {
+    margin-left: 0;
+  }
+  
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+// Card Header
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  font-size: 16px;
+  color: var(--ion-color-medium);
+  font-weight: 500;
+}
+
+.info-icon {
+  font-size: 18px;
+  color: var(--ion-color-medium);
+}
+
+// Main Value
+.main-value {
+  font-size: 42px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 12px;
+  
+  &.low {
+    color: #FF9800; // Orange
+  }
+  
+  &.medium {
+    color: #2196F3; // Blue
+  }
+  
+  &.high {
+    color: #4CAF50; // Green
+  }
+}
+
+// Sub Stat
+.sub-stat {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  color: var(--ion-color-medium);
+}
+
+.sub-value {
+  font-weight: 600;
+  
+  &.low {
+    color: #FF9800; // Orange
+  }
+  
+  &.medium {
+    color: #2196F3; // Blue
+  }
+  
+  &.high {
+    color: #4CAF50; // Green
+  }
+  
+  &.heart-rate {
+    color: #F44336; // Red
+  }
+}
+
+// Graph Card
+.graph-card {
+  margin-bottom: 16px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+// HRV Graph
+.hrv-graph-container {
+  position: relative;
+  height: 180px;
+}
+
+.hrv-line-chart {
+  position: relative;
+  height: 150px;
+  width: 100%;
+  
+  svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  
+  .hrv-line {
+    fill: none;
+    stroke: #E91E63; // Pink
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+}
+
+// Coherence Graph
+.coherence-graph-container {
+  position: relative;
+  height: 180px;
+}
+
+.coherence-chart {
+  position: relative;
+  height: 150px;
+  width: 100%;
+  
+  .coherence-zones {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    
+    .zone {
+      width: 100%;
+      
+      &.high {
+        height: 33.3%;
+        background-color: rgba(76, 175, 80, 0.2); // Green
+      }
+      
+      &.medium {
+        height: 33.3%;
+        background-color: rgba(33, 150, 243, 0.2); // Blue
+      }
+      
+      &.low {
+        height: 33.4%;
+        background-color: rgba(255, 152, 0, 0.2); // Orange
+      }
+    }
+  }
+  
+  svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+  }
+  
+  .coherence-line {
+    fill: none;
+    stroke: #FFFFFF;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+  }
+}
+
+// Axes
+.time-axis, .value-axis {
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 12px;
+  color: var(--ion-color-medium);
+}
+
+.time-axis {
+  bottom: -20px;
+  left: 0;
+}
+
+.value-axis {
+  top: 0;
+  right: -30px;
+  height: 100%;
+  width: 30px;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+// Controls
+.controls-container {
+  margin: 20px 0;
+  padding: 15px;
+  border-radius: 16px;
+  background-color: rgba(var(--ion-color-light-rgb), 0.8);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+ion-button {
+  --border-radius: 25px;
+  height: 60px;
+  font-size: 18px;
+  margin: 10px 0;
+  
+  ion-icon {
+    font-size: 24px;
+    margin-right: 8px;
+  }
+  
+  &::part(native) {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  &:active::part(native) {
+    transform: translateY(2px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.session-status {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  font-size: 16px;
+  color: var(--ion-color-danger);
+  
+  .pulse-icon {
+    font-size: 20px;
+    margin-right: 8px;
+    animation: pulse 1.5s infinite;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.95);
+    opacity: 0.7;
+  }
+}

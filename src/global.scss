@@ -1,0 +1,146 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "@ionic/angular/css/normalize.css";
+@import "@ionic/angular/css/structure.css";
+@import "@ionic/angular/css/typography.css";
+@import "@ionic/angular/css/display.css";
+
+/* Optional CSS utils that can be commented out */
+@import "@ionic/angular/css/padding.css";
+@import "@ionic/angular/css/float-elements.css";
+@import "@ionic/angular/css/text-alignment.css";
+@import "@ionic/angular/css/text-transformation.css";
+@import "@ionic/angular/css/flex-utils.css";
+
+/**
+ * Ionic Dark Mode
+ * -----------------------------------------------------
+ * For more info, please see:
+ * https://ionicframework.com/docs/theming/dark-mode
+ */
+
+/* @import "@ionic/angular/css/palettes/dark.always.css"; */
+/* @import "@ionic/angular/css/palettes/dark.class.css"; */
+@import '@ionic/angular/css/palettes/dark.system.css';
+
+// Add to src/global.scss
+:root {
+    --ion-border-radius: 16px;
+  }
+  
+  ion-content {
+    --background: var(--ion-background-color);
+  }
+  
+  ion-card {
+    border-radius: var(--ion-border-radius);
+    overflow: hidden;
+  }
+  
+  ion-button {
+    --border-radius: 8px;
+    font-weight: 500;
+  }
+  
+  ion-item {
+    --padding-start: 16px;
+    --inner-padding-end: 16px;
+  }
+  
+  // Add ripple effect to buttons
+  ion-button::part(native) {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  ion-button::after {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    background-image: radial-gradient(circle, #fff 10%, transparent 10.01%);
+    background-repeat: no-repeat;
+    background-position: 50%;
+    transform: scale(10, 10);
+    opacity: 0;
+    transition: transform .5s, opacity 1s;
+  }
+  
+  ion-button:active::after {
+    transform: scale(0, 0);
+    opacity: .3;
+    transition: 0s;
+  }
+
+  // Add to src/global.scss
+
+// Make all buttons and interactive elements clearly touchable
+ion-button {
+    --border-radius: 12px;
+    --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    
+    &::part(native) {
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    
+    &:active::part(native) {
+      transform: translateY(2px);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+  }
+  
+  // Add a subtle indicator to all list items that are clickable
+  ion-item[button] {
+    --border-radius: 8px;
+    margin: 8px 0;
+    --background: rgba(var(--ion-color-light-rgb), 0.8);
+    --background-activated: rgba(var(--ion-color-primary-rgb), 0.1);
+    --background-focused: rgba(var(--ion-color-primary-rgb), 0.1);
+    --background-hover: rgba(var(--ion-color-primary-rgb), 0.05);
+    --ripple-color: var(--ion-color-primary);
+    
+    &::part(native) {
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    
+    &:active::part(native) {
+      transform: translateY(1px);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+  }
+  
+  // Add a visual indicator for toggle buttons
+  ion-toggle {
+    --handle-width: 24px;
+    --handle-height: 24px;
+    --handle-border-radius: 50%;
+    --handle-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    height: 32px;
+    width: 52px;
+    
+    &::part(track) {
+      height: 32px;
+      width: 52px;
+      border-radius: 16px;
+      transition: background 0.3s ease;
+    }
+  }
+  
